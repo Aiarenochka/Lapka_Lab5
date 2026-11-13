@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ua.edu.nuos.lapka_lab5.controller.MainController"
+            prefWidth="1150" prefHeight="640">
+
+    <top>
+        <Label text="Lapka — база притулків та тварин" style="-fx-font-size: 20px; -fx-font-weight: bold;">
+            <padding>
+                <Insets top="10" right="15" bottom="5" left="15"/>
+            </padding>
+        </Label>
+    </top>
+
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+
+            <Tab text="Тварини">
+                <HBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+
+                    <TableView fx:id="petTable" HBox.hgrow="ALWAYS">
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        </columnResizePolicy>
+                        <columns>
+                            <TableColumn fx:id="colPetId" text="ID" prefWidth="40"/>
+                            <TableColumn fx:id="colPetName" text="Кличка" prefWidth="90"/>
+                            <TableColumn fx:id="colPetSpecies" text="Вид" prefWidth="60"/>
+                            <TableColumn fx:id="colPetSex" text="Стать" prefWidth="75"/>
+                            <TableColumn fx:id="colPetBreed" text="Порода" prefWidth="190"/>
+                            <TableColumn fx:id="colPetAge" text="Вік (міс.)" prefWidth="70"/>
+                            <TableColumn fx:id="colPetStatus" text="Статус" prefWidth="90"/>
+                            <TableColumn fx:id="colPetShelter" text="Притулок" prefWidth="180"/>
+                        </columns>
+                    </TableView>
+
+                    <VBox spacing="6" prefWidth="300">
+                        <Label text="Кличка:"/>
+                        <TextField fx:id="petNameField"/>
+                        <Label text="Вид:"/>
+                        <ComboBox fx:id="petSpeciesBox" maxWidth="Infinity"/>
+                        <Label text="Стать:"/>
+                        <ComboBox fx:id="petSexBox" maxWidth="Infinity"/>
+                        <Label text="Порода:"/>
+                        <TextField fx:id="petBreedField" promptText="метис"/>
+                        <Label text="Вік (місяців):"/>
+                        <TextField fx:id="petAgeField"/>
+                        <Label text="Статус:"/>
+                        <ComboBox fx:id="petStatusBox" maxWidth="Infinity"/>
+                        <Label text="Притулок:"/>
+                        <ComboBox fx:id="petShelterBox" maxWidth="Infinity"/>
+                        <Label text="Опис:"/>
+                        <TextArea fx:id="petDescriptionArea" prefRowCount="3" wrapText="true"/>
+                        <HBox spacing="8">
+                            <Button text="Додати" onAction="#onAddPet" prefWidth="140"/>
+                            <Button text="Зберегти зміни" onAction="#onUpdatePet" prefWidth="140"/>
+                        </HBox>
+                        <HBox spacing="8">
+                            <Button text="Видалити" onAction="#onDeletePet" prefWidth="140"/>
+                            <Button text="Очистити форму" onAction="#onClearPet" prefWidth="140"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+            </Tab>
+
+            <Tab text="Притулки">
+                <HBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+
+                    <TableView fx:id="shelterTable" HBox.hgrow="ALWAYS">
+                        <columnResizePolicy>
+                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        </columnResizePolicy>
+                        <columns>
+                            <TableColumn fx:id="colShelterId" text="ID" prefWidth="40"/>
+                            <TableColumn fx:id="colShelterName" text="Назва" prefWidth="190"/>
+                            <TableColumn fx:id="colShelterCity" text="Місто" prefWidth="80"/>
+                            <TableColumn fx:id="colShelterPhone" text="Телефон" prefWidth="120"/>
+                            <TableColumn fx:id="colShelterEmail" text="Email" prefWidth="150"/>
+                            <TableColumn fx:id="colShelterAddress" text="Адреса" prefWidth="150"/>
+                        </columns>
+                    </TableView>
+
+                    <VBox spacing="6" prefWidth="300">
+                        <Label text="Назва:"/>
+                        <TextField fx:id="shelterNameField"/>
+                        <Label text="Місто:"/>
+                        <TextField fx:id="shelterCityField"/>
+                        <Label text="Телефон:"/>
+                        <TextField fx:id="shelterPhoneField" promptText="+380XXXXXXXXX"/>
+                        <Label text="Email:"/>
+                        <TextField fx:id="shelterEmailField"/>
+                        <Label text="Адреса (необов'язково):"/>
+                        <TextField fx:id="shelterAddressField"/>
+                        <HBox spacing="8">
+                            <Button text="Додати" onAction="#onAddShelter" prefWidth="140"/>
+                            <Button text="Зберегти зміни" onAction="#onUpdateShelter" prefWidth="140"/>
+                        </HBox>
+                        <HBox spacing="8">
+                            <Button text="Видалити" onAction="#onDeleteShelter" prefWidth="140"/>
+                            <Button text="Очистити форму" onAction="#onClearShelter" prefWidth="140"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+            </Tab>
+
+            <Tab text="Запити">
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Запит:"/>
+                        <ComboBox fx:id="queryBox" prefWidth="520"/>
+                        <Button text="Виконати запит" onAction="#onRunQuery"/>
+                    </HBox>
+
+                    <FlowPane hgap="12" vgap="6">
+                        <VBox fx:id="paramSpecies" spacing="4">
+                            <Label text="Вид:"/>
+                            <ComboBox fx:id="querySpeciesBox" prefWidth="150"/>
+                        </VBox>
+                        <VBox fx:id="paramCity" spacing="4">
+                            <Label text="Місто:"/>
+                            <ComboBox fx:id="queryCityBox" prefWidth="150"/>
+                        </VBox>
+                        <VBox fx:id="paramPetId" spacing="4">
+                            <Label text="ID тварини:"/>
+                            <TextField fx:id="queryPetIdField" prefWidth="100"/>
+                        </VBox>
+                        <VBox fx:id="paramMonths" spacing="4">
+                            <Label text="Кількість місяців N:"/>
+                            <TextField fx:id="queryMonthsField" prefWidth="130"/>
+                        </VBox>
+                        <VBox fx:id="paramFullName" spacing="4">
+                            <Label text="ПІБ:"/>
+                            <TextField fx:id="queryFullNameField" prefWidth="220"/>
+                        </VBox>
+                        <VBox fx:id="paramPhone" spacing="4">
+                            <Label text="Телефон:"/>
+                            <TextField fx:id="queryPhoneField" prefWidth="140" promptText="+380XXXXXXXXX"/>
+                        </VBox>
+                        <VBox fx:id="paramReason" spacing="4">
+                            <Label text="Про себе:"/>
+                            <TextField fx:id="queryReasonField" prefWidth="300"/>
+                        </VBox>
+                        <VBox fx:id="paramApplication" spacing="4">
+                            <Label text="Нова анкета:"/>
+                            <ComboBox fx:id="queryApplicationBox" prefWidth="320"/>
+                        </VBox>
+                    </FlowPane>
+
+                    <TextArea fx:id="resultArea" editable="false" VBox.vgrow="ALWAYS"
+                              style="-fx-font-family: 'Consolas'; -fx-font-size: 13px;"/>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+
+    <bottom>
+        <Label fx:id="statusLabel" text="Готово">
+            <padding>
+                <Insets top="5" right="15" bottom="8" left="15"/>
+            </padding>
+        </Label>
+    </bottom>
+</BorderPane>
